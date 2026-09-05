@@ -302,54 +302,54 @@ export function Hero({
   }
 
   return (
-    <section
-      ref={heroRef}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-      className="
-        relative
-        min-h-[680px]
-        overflow-hidden
-        bg-[#171513]
-        lg:min-h-[760px]
-      "
-    >
+<section
+  ref={heroRef}
+  onPointerMove={handlePointerMove}
+  onPointerLeave={handlePointerLeave}
+  className="
+    relative
+    h-screen
+    min-h-screen
+    overflow-hidden
+    bg-[#171513]
+  "
+>
       {/* ═══════════════════════════════════════
           BACKGROUND
       ═══════════════════════════════════════ */}
 
-      <motion.div
-        className="absolute -inset-[5%]"
-        style={
-          shouldReduceMotion
-            ? undefined
-            : {
-                y: backgroundY,
-                scale: backgroundScale,
-              }
+<motion.div
+  className="absolute -inset-[5%]"
+  style={
+    shouldReduceMotion
+      ? undefined
+      : {
+          y: backgroundY,
+          scale: backgroundScale,
         }
-      >
-        <motion.div
-          className="relative h-full w-full"
-          style={
-            shouldReduceMotion
-              ? undefined
-              : {
-                  x: backgroundMouseX,
-                  y: backgroundMouseY,
-                }
+  }
+>
+  <motion.div
+    className="relative h-full w-full"
+    style={
+      shouldReduceMotion
+        ? undefined
+        : {
+            x: backgroundMouseX,
+            y: backgroundMouseY,
           }
-        >
-          <Image
-            src={backgroundImage}
-            alt="Kuska Motion fitness and lifestyle"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </motion.div>
-      </motion.div>
+    }
+  >
+    <Image
+      src={backgroundImage}
+      alt="Kuska Motion fitness and lifestyle"
+      fill
+      priority
+      sizes="100vw"
+      className="object-cover object-center"
+    />
+  </motion.div>
+</motion.div>
 
       {/* ═══════════════════════════════════════
           BASE PHOTO GRADING
@@ -791,7 +791,7 @@ export function Hero({
           >
             {/* Heading */}
 
-            <div className="mb-6">
+            <div className="mb-6 mt-10">
               <motion.p
                 initial={
                   shouldReduceMotion
