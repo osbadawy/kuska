@@ -1,0 +1,5 @@
+Background       #171513
+Primary blush    #D9A99C
+Light blush      #E6B8AD
+Hover blush      #E9C1B7
+Warm white       #F8F2EE
