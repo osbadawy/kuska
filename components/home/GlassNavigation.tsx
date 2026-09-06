@@ -29,7 +29,7 @@ const HERO_LINKS: HeroLink[] = [
   {
     label: "Workout",
     description: "Training, strength & movement.",
-    href: "/workouts",
+    href: "/workout",
     icon: Dumbbell,
   },
   {

@@ -27,3 +27,34 @@ export const ContactMessageStatus = {
 } as const
 
 export type ContactMessageStatus = (typeof ContactMessageStatus)[keyof typeof ContactMessageStatus]
+
+
+export const WorkoutDifficulty = {
+  BEGINNER: 'BEGINNER',
+  INTERMEDIATE: 'INTERMEDIATE',
+  ADVANCED: 'ADVANCED'
+} as const
+
+export type WorkoutDifficulty = (typeof WorkoutDifficulty)[keyof typeof WorkoutDifficulty]
+
+
+export const RunningContentType = {
+  GUIDE: 'GUIDE',
+  PLAN: 'PLAN',
+  JOURNAL: 'JOURNAL',
+  CITY_GUIDE: 'CITY_GUIDE',
+  CHALLENGE: 'CHALLENGE',
+  RUN_CLUB_EVENT: 'RUN_CLUB_EVENT'
+} as const
+
+export type RunningContentType = (typeof RunningContentType)[keyof typeof RunningContentType]
+
+
+export const RunningDifficulty = {
+  ALL_LEVELS: 'ALL_LEVELS',
+  BEGINNER: 'BEGINNER',
+  INTERMEDIATE: 'INTERMEDIATE',
+  ADVANCED: 'ADVANCED'
+} as const
+
+export type RunningDifficulty = (typeof RunningDifficulty)[keyof typeof RunningDifficulty]

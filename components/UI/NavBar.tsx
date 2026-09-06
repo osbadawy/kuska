@@ -63,7 +63,7 @@ export function NavBar({
         
             <ProductItem
               title="Workout"
-              href="/workouts"
+              href="/workout"
               src="/images/nav/nav4.jpg"
               description="Strength, mobility and training routines you can actually stick to."
             />
@@ -94,15 +94,7 @@ export function NavBar({
               About Kuska
             </HoveredLink>
 
-            <HoveredLink href="/myjourney">
-              My Journey
-            </HoveredLink>
-
-            <HoveredLink href="/philosophy">
-              My Philosophy
-            </HoveredLink>
-
-            <HoveredLink href="/contact">
+            <HoveredLink href="/work-with-me">
               Work With Me
             </HoveredLink>
           </div>

@@ -42,3 +42,23 @@ export type Verification = Prisma.VerificationModel
  * 
  */
 export type ContactMessage = Prisma.ContactMessageModel
+/**
+ * Model NutritionRecipe
+ * 
+ */
+export type NutritionRecipe = Prisma.NutritionRecipeModel
+/**
+ * Model Workout
+ * 
+ */
+export type Workout = Prisma.WorkoutModel
+/**
+ * Model WorkoutExercise
+ * 
+ */
+export type WorkoutExercise = Prisma.WorkoutExerciseModel
+/**
+ * Model RunningContent
+ * 
+ */
+export type RunningContent = Prisma.RunningContentModel

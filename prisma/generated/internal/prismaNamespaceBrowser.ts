@@ -55,7 +55,11 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  ContactMessage: 'ContactMessage'
+  ContactMessage: 'ContactMessage',
+  NutritionRecipe: 'NutritionRecipe',
+  Workout: 'Workout',
+  WorkoutExercise: 'WorkoutExercise',
+  RunningContent: 'RunningContent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -146,6 +150,99 @@ export const ContactMessageScalarFieldEnum = {
 } as const
 
 export type ContactMessageScalarFieldEnum = (typeof ContactMessageScalarFieldEnum)[keyof typeof ContactMessageScalarFieldEnum]
+
+
+export const NutritionRecipeScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  image: 'image',
+  imagePath: 'imagePath',
+  category: 'category',
+  calories: 'calories',
+  protein: 'protein',
+  carbs: 'carbs',
+  fat: 'fat',
+  prepTime: 'prepTime',
+  cookTime: 'cookTime',
+  servings: 'servings',
+  ingredients: 'ingredients',
+  instructions: 'instructions',
+  isPublished: 'isPublished',
+  isFeatured: 'isFeatured',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NutritionRecipeScalarFieldEnum = (typeof NutritionRecipeScalarFieldEnum)[keyof typeof NutritionRecipeScalarFieldEnum]
+
+
+export const WorkoutScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  image: 'image',
+  imagePath: 'imagePath',
+  category: 'category',
+  difficulty: 'difficulty',
+  durationMinutes: 'durationMinutes',
+  caloriesBurned: 'caloriesBurned',
+  equipment: 'equipment',
+  targetAreas: 'targetAreas',
+  isPublished: 'isPublished',
+  isFeatured: 'isFeatured',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkoutScalarFieldEnum = (typeof WorkoutScalarFieldEnum)[keyof typeof WorkoutScalarFieldEnum]
+
+
+export const WorkoutExerciseScalarFieldEnum = {
+  id: 'id',
+  workoutId: 'workoutId',
+  name: 'name',
+  sets: 'sets',
+  reps: 'reps',
+  durationSeconds: 'durationSeconds',
+  restSeconds: 'restSeconds',
+  notes: 'notes',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkoutExerciseScalarFieldEnum = (typeof WorkoutExerciseScalarFieldEnum)[keyof typeof WorkoutExerciseScalarFieldEnum]
+
+
+export const RunningContentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  summary: 'summary',
+  content: 'content',
+  type: 'type',
+  difficulty: 'difficulty',
+  image: 'image',
+  imagePath: 'imagePath',
+  durationWeeks: 'durationWeeks',
+  runsPerWeek: 'runsPerWeek',
+  distanceKm: 'distanceKm',
+  location: 'location',
+  eventDate: 'eventDate',
+  meetingPoint: 'meetingPoint',
+  pace: 'pace',
+  challengeTarget: 'challengeTarget',
+  tags: 'tags',
+  isPublished: 'isPublished',
+  isFeatured: 'isFeatured',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RunningContentScalarFieldEnum = (typeof RunningContentScalarFieldEnum)[keyof typeof RunningContentScalarFieldEnum]
 
 
 export const SortOrder = {

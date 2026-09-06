@@ -22,6 +22,28 @@ enum ContactMessageStatus {
   ARCHIVED
 }
 
+enum WorkoutDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum RunningContentType {
+  GUIDE
+  PLAN
+  JOURNAL
+  CITY_GUIDE
+  CHALLENGE
+  RUN_CLUB_EVENT
+}
+
+enum RunningDifficulty {
+  ALL_LEVELS
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
 model User {
   id            String    @id
   name          String
@@ -104,5 +126,140 @@ model ContactMessage {
 
   @@index([status])
   @@index([category])
+  @@index([createdAt])
+}
+
+model NutritionRecipe {
+  id String @id @default(cuid())
+
+  title       String
+  slug        String @unique
+  description String?
+
+  image     String
+  imagePath String?
+  category  String
+
+  calories Int
+  protein  Int
+  carbs    Int?
+  fat      Int?
+
+  prepTime Int?
+  cookTime Int?
+  servings Int?
+
+  ingredients  String[]
+  instructions String[]
+
+  isPublished Boolean @default(true)
+  isFeatured  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([isPublished])
+  @@index([isFeatured])
+  @@index([createdAt])
+}
+
+model Workout {
+  id String @id @default(cuid())
+
+  title       String
+  slug        String @unique
+  description String?
+
+  image     String
+  imagePath String?
+
+  category   String
+  difficulty WorkoutDifficulty
+
+  durationMinutes Int?
+  caloriesBurned  Int?
+
+  equipment   String[]
+  targetAreas String[]
+
+  isPublished Boolean @default(true)
+  isFeatured  Boolean @default(false)
+
+  exercises WorkoutExercise[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([difficulty])
+  @@index([isPublished])
+  @@index([isFeatured])
+  @@index([createdAt])
+}
+
+model WorkoutExercise {
+  id String @id @default(cuid())
+
+  workoutId String
+  workout   Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+
+  name String
+
+  sets Int?
+  reps String?
+
+  durationSeconds Int?
+  restSeconds     Int?
+
+  notes String?
+
+  order Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([workoutId])
+  @@index([order])
+}
+
+model RunningContent {
+  id String @id @default(cuid())
+
+  title   String
+  slug    String @unique
+  summary String?
+  content String? @db.Text
+
+  type       RunningContentType
+  difficulty RunningDifficulty @default(ALL_LEVELS)
+
+  image     String
+  imagePath String?
+
+  durationWeeks Int?
+  runsPerWeek   Int?
+  distanceKm    Float?
+
+  location     String?
+  eventDate    DateTime?
+  meetingPoint String?
+  pace         String?
+
+  challengeTarget String?
+
+  tags String[]
+
+  isPublished Boolean @default(true)
+  isFeatured  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([difficulty])
+  @@index([isPublished])
+  @@index([isFeatured])
+  @@index([eventDate])
   @@index([createdAt])
 }
