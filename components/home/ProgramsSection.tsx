@@ -39,7 +39,7 @@ export function ProgramsSection() {
             details="Progressive plans with clear sessions, thoughtful pacing and enough flexibility to fit around real life."
             meta="Build strength"
             image="/programs/home.jpg"
-            href="/programs/gym"
+            href="/workout"
             className="md:col-span-2 md:row-span-2"
           />
 
@@ -49,7 +49,7 @@ export function ProgramsSection() {
             details="Short, focused sessions designed for the days when your living room is the gym."
             meta="Train anywhere"
             image="/programs/gym.jpg"
-            href="/programs/home"
+            href="/workout"
             className="lg:col-span-1"
           />
 
