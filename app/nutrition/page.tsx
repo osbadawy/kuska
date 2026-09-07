@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 import { FoodCard } from "@/components/UI/FoodCard";
+import { EmptyState } from "@/components/UI/EmptyState";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -58,7 +59,6 @@ export default async function NutritionPage() {
           xl:px-20
         "
       >
-        {/* Background glow */}
         <div
           className="
             pointer-events-none
@@ -205,17 +205,15 @@ export default async function NutritionPage() {
       <section
         id="recipes"
         className="
+          mt-20
           px-5
           pb-24
-          mt-20
           sm:px-8
           lg:px-16
           lg:pb-32
         "
       >
         <div className="mx-auto max-w-[1440px]">
-          {/* Header */}
-
           <div
             className="
               mb-10
@@ -281,8 +279,6 @@ export default async function NutritionPage() {
             )}
           </div>
 
-          {/* Cards */}
-
           {recipes.length > 0 ? (
             <div
               className="
@@ -306,7 +302,11 @@ export default async function NutritionPage() {
               ))}
             </div>
           ) : (
-            <EmptyRecipes />
+            <EmptyState
+              icon={Salad}
+              title="Something good is cooking."
+              description="There aren't any published recipes yet. Check back soon for something delicious."
+            />
           )}
         </div>
       </section>
@@ -435,72 +435,5 @@ export default async function NutritionPage() {
         </div>
       </section>
     </main>
-  );
-}
-
-/* ═════════════════════════════════════
-   EMPTY STATE
-═════════════════════════════════════ */
-
-function EmptyRecipes() {
-  return (
-    <div
-      className="
-        flex
-        min-h-[380px]
-        flex-col
-        items-center
-        justify-center
-        rounded-[28px]
-        border
-        border-dashed
-        border-[#28211F]/15
-        bg-white/30
-        px-6
-        text-center
-      "
-    >
-      <div
-        className="
-          flex
-          h-12
-          w-12
-          items-center
-          justify-center
-          rounded-full
-          bg-[#E7B6AB]/20
-          text-[#B87E74]
-        "
-      >
-        <Salad
-          size={19}
-          strokeWidth={1.5}
-        />
-      </div>
-
-      <h3
-        className="
-          mt-6
-          font-serif
-          text-[30px]
-          tracking-[-0.03em]
-        "
-      >
-        Something good is cooking.
-      </h3>
-
-      <p
-        className="
-          mt-3
-          max-w-[400px]
-          text-sm
-          leading-6
-          text-[#7A6C67]
-        "
-      >
-        There aren&apos;t any published recipes yet.
-        Check back soon for something delicious.
-      </p>
-    </div>
   );
 }

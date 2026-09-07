@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
@@ -16,6 +15,7 @@ import {
   UsersRound,
 } from "lucide-react";
 
+import { EmptyState } from "@/components/UI/EmptyState";
 import { FoodCard } from "@/components/UI/FoodCard";
 import { prisma } from "@/lib/prisma";
 
@@ -53,6 +53,8 @@ export async function generateMetadata({
   if (!recipe) {
     return {
       title: "Recipe not found | Kuska Motion",
+      description:
+        "This recipe is not currently available.",
     };
   }
 
@@ -65,9 +67,11 @@ export async function generateMetadata({
 
     openGraph: {
       title: recipe.title,
+
       description:
         recipe.description ||
         `Discover ${recipe.title} from Kuska Motion.`,
+
       images: [
         {
           url: recipe.image,
@@ -94,8 +98,69 @@ export default async function RecipePage({
       },
     });
 
+  /*
+   * If the recipe doesn't exist or isn't published,
+   * show the reusable empty-state page.
+   */
   if (!recipe) {
-    notFound();
+    return (
+      <main
+        className="
+          min-h-screen
+          bg-[#FAF7F5]
+          px-5
+          pb-24
+          pt-36
+          text-[#28211F]
+          sm:px-8
+          lg:px-16
+          lg:pt-44
+        "
+      >
+        <div className="mx-auto max-w-[1440px]">
+          <EmptyState
+            icon={Salad}
+            title="Recipe not found."
+            description="This recipe isn't available right now. It may have been removed or hasn't been published yet."
+          />
+
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/nutrition"
+              className="
+                group
+                inline-flex
+                h-12
+                items-center
+                gap-3
+                rounded-full
+                bg-[#28211F]
+                px-6
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.15em]
+                text-white
+                transition-all
+                duration-300
+                hover:-translate-y-1
+              "
+            >
+              <ArrowLeft
+                size={13}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:-translate-x-1
+                "
+              />
+
+              Back to recipes
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
   }
 
   const relatedRecipes =
@@ -650,19 +715,21 @@ export default async function RecipePage({
                     </h2>
                   </div>
 
-                  <p
-                    className="
-                      text-[10px]
-                      uppercase
-                      tracking-[0.14em]
-                      text-[#927F78]
-                    "
-                  >
-                    {recipe.ingredients.length}{" "}
-                    {recipe.ingredients.length === 1
-                      ? "ingredient"
-                      : "ingredients"}
-                  </p>
+                  {recipe.ingredients.length > 0 && (
+                    <p
+                      className="
+                        text-[10px]
+                        uppercase
+                        tracking-[0.14em]
+                        text-[#927F78]
+                      "
+                    >
+                      {recipe.ingredients.length}{" "}
+                      {recipe.ingredients.length === 1
+                        ? "ingredient"
+                        : "ingredients"}
+                    </p>
+                  )}
                 </div>
 
                 {recipe.ingredients.length > 0 ? (
@@ -722,10 +789,13 @@ export default async function RecipePage({
                     )}
                   </div>
                 ) : (
-                  <p className="mt-7 text-sm text-[#7A6C67]">
-                    Ingredients haven&apos;t been added to
-                    this recipe yet.
-                  </p>
+                  <div className="mt-7">
+                    <EmptyState
+                      icon={Salad}
+                      title="Ingredients coming soon."
+                      description="The ingredients for this recipe haven't been added yet."
+                    />
+                  </div>
                 )}
               </section>
 
@@ -823,10 +893,13 @@ export default async function RecipePage({
                     )}
                   </div>
                 ) : (
-                  <p className="mt-7 text-sm text-[#7A6C67]">
-                    Cooking instructions haven&apos;t been
-                    added yet.
-                  </p>
+                  <div className="mt-7">
+                    <EmptyState
+                      icon={ChefHat}
+                      title="Method coming soon."
+                      description="The cooking instructions for this recipe haven't been added yet."
+                    />
+                  </div>
                 )}
               </section>
             </div>
@@ -940,94 +1013,94 @@ export default async function RecipePage({
           RELATED RECIPES
       ═══════════════════════════════════════ */}
 
-      {relatedRecipes.length > 0 && (
-        <section
-          className="
-            bg-[#F0E7E3]
-            px-5
-            py-24
-            sm:px-8
-            lg:px-16
-            lg:py-32
-          "
-        >
-          <div className="mx-auto max-w-[1440px]">
-            <div
-              className="
-                mb-10
-                flex
-                flex-col
-                justify-between
-                gap-6
-                sm:flex-row
-                sm:items-end
-              "
-            >
-              <div>
-                <div className="flex items-center gap-2">
-                  <Sparkles
-                    size={12}
-                    className="text-[#B87E74]"
-                  />
+      <section
+        className="
+          bg-[#F0E7E3]
+          px-5
+          py-24
+          sm:px-8
+          lg:px-16
+          lg:py-32
+        "
+      >
+        <div className="mx-auto max-w-[1440px]">
+          <div
+            className="
+              mb-10
+              flex
+              flex-col
+              justify-between
+              gap-6
+              sm:flex-row
+              sm:items-end
+            "
+          >
+            <div>
+              <div className="flex items-center gap-2">
+                <Sparkles
+                  size={12}
+                  className="text-[#B87E74]"
+                />
 
-                  <p
-                    className="
-                      text-[10px]
-                      font-medium
-                      uppercase
-                      tracking-[0.2em]
-                      text-[#B87E74]
-                    "
-                  >
-                    Keep cooking
-                  </p>
-                </div>
-
-                <h2
+                <p
                   className="
-                    mt-4
-                    font-serif
-                    text-[44px]
-                    leading-[0.95]
-                    tracking-[-0.04em]
-                    sm:text-[56px]
+                    text-[10px]
+                    font-medium
+                    uppercase
+                    tracking-[0.2em]
+                    text-[#B87E74]
                   "
                 >
-                  You might also
-                  <br />
-
-                  <span className="italic text-[#B87E74]">
-                    like these.
-                  </span>
-                </h2>
+                  Keep cooking
+                </p>
               </div>
 
-              <Link
-                href="/nutrition"
+              <h2
                 className="
-                  group
-                  inline-flex
-                  items-center
-                  gap-3
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.17em]
-                  text-[#28211F]
+                  mt-4
+                  font-serif
+                  text-[44px]
+                  leading-[0.95]
+                  tracking-[-0.04em]
+                  sm:text-[56px]
                 "
               >
-                View all recipes
+                You might also
+                <br />
 
-                <ArrowRight
-                  size={14}
-                  className="
-                    transition-transform
-                    group-hover:translate-x-1
-                  "
-                />
-              </Link>
+                <span className="italic text-[#B87E74]">
+                  like these.
+                </span>
+              </h2>
             </div>
 
+            <Link
+              href="/nutrition"
+              className="
+                group
+                inline-flex
+                items-center
+                gap-3
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.17em]
+                text-[#28211F]
+              "
+            >
+              View all recipes
+
+              <ArrowRight
+                size={14}
+                className="
+                  transition-transform
+                  group-hover:translate-x-1
+                "
+              />
+            </Link>
+          </div>
+
+          {relatedRecipes.length > 0 ? (
             <div
               className="
                 grid
@@ -1057,9 +1130,15 @@ export default async function RecipePage({
                 )
               )}
             </div>
-          </div>
-        </section>
-      )}
+          ) : (
+            <EmptyState
+              icon={Sparkles}
+              title="Nothing similar yet."
+              description="There aren't any other published recipes in this category yet. More are on the way."
+            />
+          )}
+        </div>
+      </section>
 
       {/* ═══════════════════════════════════════
           FINAL LINK
